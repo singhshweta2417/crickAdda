@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:crickAdda/view/const_widget/button_const.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
@@ -71,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "match": "IND vs ENG"
     }
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
   PreferredSizeWidget appBarDesign() {
     return AppBar(
       elevation: 0,
-      // backgroundColor: AppColor.primaryRedColor,
       bottom: PreferredSize(
           preferredSize: const Size.fromHeight(0),
           child: ContainerConst(
@@ -162,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                appLogoWithName(),
+                // appLogoWithName(),
                 Sizes.spaceWidth25,
               ],
             ),

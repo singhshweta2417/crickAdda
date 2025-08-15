@@ -1,14 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:crickAdda/res/sizes_const.dart';
-import 'package:crickAdda/utils/route/app_routes.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
 import 'package:crickAdda/view/drawer/drawer_screen.dart';
 import 'package:crickAdda/view/widgets/circular_profile_image_widget.dart';
-import 'package:crickAdda/view/widgets/story_view_widget.dart';
-import 'package:crickAdda/view/const_widget/tab_appbar.dart';
-
 import '../../../res/color_const.dart';
 
 class BottomNavWinnersScreen extends StatefulWidget {
@@ -22,22 +17,29 @@ class _BottomNavWinnersScreenState extends State<BottomNavWinnersScreen>
     with SingleTickerProviderStateMixin {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       key: scaffoldKey,
-      drawer:const HomeScreenDrawer(),
+      drawer: const HomeScreenDrawer(),
       appBar: AppBar(
-        leading:  CircularProfileImageWidget(onPressed: (){
-          if (scaffoldKey.currentState!.isDrawerOpen) {
-            scaffoldKey.currentState!.closeDrawer();
-          } else {
-            scaffoldKey.currentState!.openDrawer();
-          }
-        },),
-        title: TextConst(text: "Rewards",textColor: AppColor.whiteColor,fontSize: Sizes.fontSizeLarge/1.25,alignment: FractionalOffset.centerLeft,fontWeight: FontWeight.w600,),
+        leading: CircularProfileImageWidget(
+          onPressed: () {
+            if (scaffoldKey.currentState!.isDrawerOpen) {
+              scaffoldKey.currentState!.closeDrawer();
+            } else {
+              scaffoldKey.currentState!.openDrawer();
+            }
+          },
+        ),
+        title: TextConst(
+          text: "Rewards",
+          textColor: AppColor.whiteColor,
+          fontSize: Sizes.fontSizeLarge / 1.25,
+          alignment: FractionalOffset.centerLeft,
+          fontWeight: FontWeight.w600,
+        ),
         backgroundColor: AppColor.blackColor,
         elevation: 0,
         actions: [
@@ -111,9 +113,11 @@ class _BottomNavWinnersScreenState extends State<BottomNavWinnersScreen>
         matchTitle: "World Cup 2024",
         date: "27 Jun, 2024",
         team1Name: "INDIA",
-        team1ImageUrl: "https://www.worldometers.info//img/flags/small/tn_be-flag.gif",
+        team1ImageUrl:
+            "https://www.worldometers.info//img/flags/small/tn_be-flag.gif",
         team2Name: "AUSTRALIA",
-        team2ImageUrl: "https://www.worldometers.info//img/flags/small/tn_bn-flag.gif",
+        team2ImageUrl:
+            "https://www.worldometers.info//img/flags/small/tn_bn-flag.gif",
         prize: "50 Crores",
         winners: [
           WinnerData(rank: "Rank #1", name: "ashu 123", prize: "Won 2 crore"),
@@ -137,7 +141,8 @@ class _BottomNavWinnersScreenState extends State<BottomNavWinnersScreen>
           child: ContainerConst(
             color: AppColor.whiteColor,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: AppColor.scaffoldBackgroundColor, width: 2),
+            border:
+                Border.all(color: AppColor.scaffoldBackgroundColor, width: 2),
             child: Column(
               children: [
                 ContainerConst(
@@ -146,17 +151,20 @@ class _BottomNavWinnersScreenState extends State<BottomNavWinnersScreen>
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextConst(text: match.matchTitle, fontSize: Sizes.fontSizeZero),
+                      TextConst(
+                          text: match.matchTitle, fontSize: Sizes.fontSizeZero),
                       TextConst(text: match.date, fontSize: Sizes.fontSizeZero),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -178,7 +186,7 @@ class _BottomNavWinnersScreenState extends State<BottomNavWinnersScreen>
                                 ),
                                 Sizes.spaceWidth5,
                                 TextConst(
-                                  text: match.team1Name.substring(0,3),
+                                  text: match.team1Name.substring(0, 3),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ],
@@ -204,7 +212,7 @@ class _BottomNavWinnersScreenState extends State<BottomNavWinnersScreen>
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 TextConst(
-                                  text: match.team2Name.substring(0,3),
+                                  text: match.team2Name.substring(0, 3),
                                   fontWeight: FontWeight.bold,
                                 ),
                                 Sizes.spaceWidth5,
@@ -256,7 +264,8 @@ class _BottomNavWinnersScreenState extends State<BottomNavWinnersScreen>
                         padding: const EdgeInsets.all(8.0),
                         child: ContainerConst(
                           width: Sizes.screenWidth / 3.5,
-                          border: Border.all(color: AppColor.scaffoldBackgroundColor),
+                          border: Border.all(
+                              color: AppColor.scaffoldBackgroundColor),
                           borderRadius: BorderRadius.circular(5),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -264,20 +273,25 @@ class _BottomNavWinnersScreenState extends State<BottomNavWinnersScreen>
                               TextConst(
                                 text: winner.rank,
                                 alignment: Alignment.centerLeft,
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                               ),
                               TextConst(
                                 text: winner.name,
                                 alignment: Alignment.centerLeft,
                                 fontSize: Sizes.fontSizeZero,
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                               ),
                               const ContainerConst(
                                 height: 70,
                                 width: 70,
                                 shape: BoxShape.circle,
                                 // color: Colors.red,
-                                image: DecorationImage(image: NetworkImage("https://randomuser.me/api/portraits/men/1.jpg"),fit: BoxFit.fill),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        "https://randomuser.me/api/portraits/men/1.jpg"),
+                                    fit: BoxFit.fill),
                               ),
                               ContainerConst(
                                 color: Colors.grey.shade100,
@@ -285,7 +299,8 @@ class _BottomNavWinnersScreenState extends State<BottomNavWinnersScreen>
                                   bottomLeft: Radius.circular(5),
                                   bottomRight: Radius.circular(5),
                                 ),
-                                padding: const EdgeInsets.symmetric(vertical: 3),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 3),
                                 child: TextConst(
                                   text: winner.prize,
                                 ),
@@ -339,4 +354,3 @@ class WinnerData {
     required this.prize,
   });
 }
-

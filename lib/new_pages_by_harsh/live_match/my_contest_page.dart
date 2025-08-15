@@ -13,13 +13,11 @@ import 'package:crickAdda/res/color_const.dart';
 import 'package:crickAdda/res/sizes_const.dart';
 import 'package:crickAdda/utils/route/app_routes.dart';
 import 'package:crickAdda/utils/utils.dart';
-import 'package:crickAdda/view/bottom_navigation/bottom_navigation_screen.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
 import 'package:crickAdda/view_model/contest_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-
 import '../../view_model/services/bottom_navigation_service.dart';
 
 class MyContestPage extends StatefulWidget {

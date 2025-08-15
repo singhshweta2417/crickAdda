@@ -104,10 +104,10 @@ class MatchPlayer {
     isBat = json['is_bat'];
     isBowl = json['is_bowl'];
     bowlerData = json['bowler_data'] != null
-        ? new BowlerData.fromJson(json['bowler_data'])
+        ? BowlerData.fromJson(json['bowler_data'])
         : null;
     batsmanData = json['batsman_data'] != null
-        ? new BatsmanData.fromJson(json['batsman_data'])
+        ? BatsmanData.fromJson(json['batsman_data'])
         : null;
     runOutBy = json['run_out_by'];
     catchBy = json['catch_by'];
@@ -131,51 +131,51 @@ class MatchPlayer {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['matchid'] = this.matchid;
-    data['playerid'] = this.playerid;
-    data['sportsmonk_pid'] = this.sportsmonkPid;
-    data['teamid'] = this.teamid;
-    data['is_playing'] = this.isPlaying;
-    data['third_party_season_id'] = this.thirdPartySeasonId;
-    data['total_point'] = this.totalPoint;
-    data['batting_point'] = this.battingPoint;
-    data['bolling_point'] = this.bollingPoint;
-    data['fielding_point'] = this.fieldingPoint;
-    data['playing_point'] = this.playingPoint;
-    data['single_double_run'] = this.singleDoubleRun;
-    data['fours'] = this.fours;
-    data['sixes'] = this.sixes;
-    data['wicket'] = this.wicket;
-    data['score'] = this.score;
-    data['is_bat'] = this.isBat;
-    data['is_bowl'] = this.isBowl;
-    if (this.bowlerData != null) {
-      data['bowler_data'] = this.bowlerData!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['matchid'] = matchid;
+    data['playerid'] = playerid;
+    data['sportsmonk_pid'] = sportsmonkPid;
+    data['teamid'] = teamid;
+    data['is_playing'] = isPlaying;
+    data['third_party_season_id'] = thirdPartySeasonId;
+    data['total_point'] = totalPoint;
+    data['batting_point'] = battingPoint;
+    data['bolling_point'] = bollingPoint;
+    data['fielding_point'] = fieldingPoint;
+    data['playing_point'] = playingPoint;
+    data['single_double_run'] = singleDoubleRun;
+    data['fours'] = fours;
+    data['sixes'] = sixes;
+    data['wicket'] = wicket;
+    data['score'] = score;
+    data['is_bat'] = isBat;
+    data['is_bowl'] = isBowl;
+    if (bowlerData != null) {
+      data['bowler_data'] = bowlerData!.toJson();
     }
-    if (this.batsmanData != null) {
-      data['batsman_data'] = this.batsmanData!.toJson();
+    if (batsmanData != null) {
+      data['batsman_data'] = batsmanData!.toJson();
     }
-    data['run_out_by'] = this.runOutBy;
-    data['catch_by'] = this.catchBy;
-    data['bowled_by'] = this.bowledBy;
-    data['wicket_type'] = this.wicketType;
-    data['wicket_fall_ball'] = this.wicketFallBall;
-    data['wicket_fall_score'] = this.wicketFallScore;
-    data['batting_order'] = this.battingOrder;
-    data['bolling_order'] = this.bollingOrder;
-    data['is_out'] = this.isOut;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['playername'] = this.playername;
-    data['playerimage'] = this.playerimage;
-    data['teamname'] = this.teamname;
-    data['designation_name'] = this.designationName;
-    data['sel_by'] = this.selBy;
-    data['c_by'] = this.cBy;
-    data['vc_by'] = this.vcBy;
-    data['Wicket_data'] = this.wicketData;
+    data['run_out_by'] = runOutBy;
+    data['catch_by'] = catchBy;
+    data['bowled_by'] = bowledBy;
+    data['wicket_type'] = wicketType;
+    data['wicket_fall_ball'] = wicketFallBall;
+    data['wicket_fall_score'] = wicketFallScore;
+    data['batting_order'] = battingOrder;
+    data['bolling_order'] = bollingOrder;
+    data['is_out'] = isOut;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['playername'] = playername;
+    data['playerimage'] = playerimage;
+    data['teamname'] = teamname;
+    data['designation_name'] = designationName;
+    data['sel_by'] = selBy;
+    data['c_by'] = cBy;
+    data['vc_by'] = vcBy;
+    data['Wicket_data'] = wicketData;
     return data;
   }
 }
@@ -198,12 +198,12 @@ class BowlerData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['overs'] = this.overs;
-    data['medians'] = this.medians;
-    data['runs'] = this.runs;
-    data['wickets'] = this.wickets;
-    data['eco'] = this.eco;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['overs'] = overs;
+    data['medians'] = medians;
+    data['runs'] = runs;
+    data['wickets'] = wickets;
+    data['eco'] = eco;
     return data;
   }
 }
@@ -226,12 +226,12 @@ class BatsmanData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['run'] = this.run;
-    data['ball'] = this.ball;
-    data['four_x'] = this.fourX;
-    data['six_x'] = this.sixX;
-    data['strike_rate'] = this.strikeRate;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['run'] = run;
+    data['ball'] = ball;
+    data['four_x'] = fourX;
+    data['six_x'] = sixX;
+    data['strike_rate'] = strikeRate;
     return data;
   }
 }
@@ -274,17 +274,17 @@ class WicketFall {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['playerid'] = this.playerid;
-    data['sportsmonk_pid'] = this.sportsmonkPid;
-    data['teamid'] = this.teamid;
-    data['wicket_fall_ball'] = this.wicketFallBall;
-    data['wicket_fall_score'] = this.wicketFallScore;
-    data['playername'] = this.playername;
-    data['playerimage'] = this.playerimage;
-    data['teamname'] = this.teamname;
-    data['designation_name'] = this.designationName;
-    data['wicket_down'] = this.wicketDown;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['playerid'] = playerid;
+    data['sportsmonk_pid'] = sportsmonkPid;
+    data['teamid'] = teamid;
+    data['wicket_fall_ball'] = wicketFallBall;
+    data['wicket_fall_score'] = wicketFallScore;
+    data['playername'] = playername;
+    data['playerimage'] = playerimage;
+    data['teamname'] = teamname;
+    data['designation_name'] = designationName;
+    data['wicket_down'] = wicketDown;
     return data;
   }
 }
@@ -335,27 +335,27 @@ class Teams {
     if (json['playerlist'] != null) {
       playerlist = <Playerlist>[];
       json['playerlist'].forEach((v) {
-        playerlist!.add(new Playerlist.fromJson(v));
+        playerlist!.add(Playerlist.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['gameid'] = this.gameid;
-    data['match_id'] = this.matchId;
-    data['userid'] = this.userid;
-    data['team_name'] = this.teamName;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['all_point'] = this.allPoint;
-    data['home_teamid'] = this.homeTeamid;
-    data['visitorteam_id'] = this.visitorteamId;
-    data['hometeam_name'] = this.hometeamName;
-    data['visitorteam_name'] = this.visitorteamName;
-    if (this.playerlist != null) {
-      data['playerlist'] = this.playerlist!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['gameid'] = gameid;
+    data['match_id'] = matchId;
+    data['userid'] = userid;
+    data['team_name'] = teamName;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['all_point'] = allPoint;
+    data['home_teamid'] = homeTeamid;
+    data['visitorteam_id'] = visitorteamId;
+    data['hometeam_name'] = hometeamName;
+    data['visitorteam_name'] = visitorteamName;
+    if (playerlist != null) {
+      data['playerlist'] = playerlist!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -435,29 +435,29 @@ class Playerlist {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['matchid'] = this.matchid;
-    data['my_teamid'] = this.myTeamid;
-    data['playerid'] = this.playerid;
-    data['sportsmonk_pid'] = this.sportsmonkPid;
-    data['designation_name'] = this.designationName;
-    data['is_captain'] = this.isCaptain;
-    data['is_vice_captain'] = this.isViceCaptain;
-    data['teamid'] = this.teamid;
-    data['total_point'] = this.totalPoint;
-    data['batting_point'] = this.battingPoint;
-    data['bolling_point'] = this.bollingPoint;
-    data['fielding_point'] = this.fieldingPoint;
-    data['playing_point'] = this.playingPoint;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['player_name'] = this.playerName;
-    data['player_image'] = this.playerImage;
-    data['teamname'] = this.teamname;
-    data['sel_by'] = this.selBy;
-    data['c_by'] = this.cBy;
-    data['vc_by'] = this.vcBy;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['matchid'] = matchid;
+    data['my_teamid'] = myTeamid;
+    data['playerid'] = playerid;
+    data['sportsmonk_pid'] = sportsmonkPid;
+    data['designation_name'] = designationName;
+    data['is_captain'] = isCaptain;
+    data['is_vice_captain'] = isViceCaptain;
+    data['teamid'] = teamid;
+    data['total_point'] = totalPoint;
+    data['batting_point'] = battingPoint;
+    data['bolling_point'] = bollingPoint;
+    data['fielding_point'] = fieldingPoint;
+    data['playing_point'] = playingPoint;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['player_name'] = playerName;
+    data['player_image'] = playerImage;
+    data['teamname'] = teamname;
+    data['sel_by'] = selBy;
+    data['c_by'] = cBy;
+    data['vc_by'] = vcBy;
     return data;
   }
 }

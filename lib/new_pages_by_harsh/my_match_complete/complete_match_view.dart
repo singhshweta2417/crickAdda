@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:crickAdda/model/game_data_model.dart';
 import 'package:crickAdda/new_pages_by_harsh/live_match/Score_card.dart';
 import 'package:crickAdda/new_pages_by_harsh/live_match/Stats.dart';
-import 'package:crickAdda/new_pages_by_harsh/live_match/commentry_page.dart';
 import 'package:crickAdda/new_pages_by_harsh/live_match/live_match_score.dart';
 import 'package:crickAdda/new_pages_by_harsh/live_match/my_contest_page.dart';
 import 'package:crickAdda/new_pages_by_harsh/live_match/teams.dart';
@@ -70,7 +69,7 @@ class _LiveMatchViewState extends State<LiveMatchView> {
               child: TabBarView(
                 children: [
                   MyContestPage(data: widget.data),
-                  Teams(),
+                  const Teams(),
                  // CommentryPage(),
                   ScorecardPage(data: widget.data,),
                   LiveStats(data: widget.data),

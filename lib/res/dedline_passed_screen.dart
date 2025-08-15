@@ -19,7 +19,7 @@ class _DedlinePassedScreenState extends State<DedlinePassedScreen> {
   Widget build(BuildContext context) {
     return  ContainerConst(
       width: Sizes.screenWidth,
-      padding:  EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      padding:  const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

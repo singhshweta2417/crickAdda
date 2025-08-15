@@ -16,7 +16,6 @@ import 'package:crickAdda/res/color_const.dart';
 import 'package:crickAdda/res/sizes_const.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
-import 'package:crickAdda/view_model/game_view_model.dart';
 import 'package:crickAdda/view_model/player_view_model.dart';
 import 'package:crickAdda/view_model/profile_view_model.dart';
 import 'package:provider/provider.dart';
@@ -30,13 +29,13 @@ class LiveTeamPreview extends StatefulWidget {
   final Teams? data4;
 
   const LiveTeamPreview({
-    Key? key,
+    super.key,
     required this.type,
     required this.data,
     required this.data2,
     required this.data3,
     required this.data4,
-  }) : super(key: key);
+  });
 
   @override
   State<LiveTeamPreview> createState() => _LiveTeamPreviewState();

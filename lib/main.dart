@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:crickAdda/view_model/add_wallet_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,8 +46,11 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => AddWalletViewModel()),
           ChangeNotifierProvider(create: (_) => PlayerProviderService()),
           ChangeNotifierProvider(create: (_) => WalletViewModel()),
-          ChangeNotifierProvider(create: (_) => ResendOtpTimerCountdownController()),
-          ChangeNotifierProvider(create: (_) => FilterModel(),),
+          ChangeNotifierProvider(
+              create: (_) => ResendOtpTimerCountdownController()),
+          ChangeNotifierProvider(
+            create: (_) => FilterModel(),
+          ),
           ChangeNotifierProvider(create: (_) => TeamService()),
           ChangeNotifierProvider(create: (_) => NotificationProvider()),
           ChangeNotifierProvider(create: (_) => AuthViewModel()),
@@ -56,24 +58,26 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProxyProvider<SharedPrefViewModel, ProfileViewModel>(
             create: (_) => ProfileViewModel(),
             update: (context, sharedPrefViewModel, profileViewModel) =>
-            profileViewModel!..updateToken(sharedPrefViewModel.userToken,context),
+                profileViewModel!
+                  ..updateToken(sharedPrefViewModel.userToken, context),
           ),
           ChangeNotifierProxyProvider<SharedPrefViewModel, GameViewModel>(
             create: (_) => GameViewModel(),
             update: (context, sharedPrefViewModel, profileViewModel) =>
-            profileViewModel!..updateToken(sharedPrefViewModel.userToken),
+                profileViewModel!..updateToken(sharedPrefViewModel.userToken),
           ),
           ChangeNotifierProvider(create: (_) => ContestViewModel()),
           ChangeNotifierProvider(create: (_) => BottomNavigationViewModel()),
           ChangeNotifierProvider(create: (_) => MlmViewModel()),
           ChangeNotifierProvider(create: (_) => BasicAppFeatureViewModel()),
-          ChangeNotifierProxyProvider<SharedPrefViewModel, NotificationViewModel>(
+          ChangeNotifierProxyProvider<SharedPrefViewModel,
+              NotificationViewModel>(
             create: (_) => NotificationViewModel(),
             update: (context, sharedPrefViewModel, profileViewModel) =>
-            profileViewModel!..updateToken(sharedPrefViewModel.userToken),
+                profileViewModel!..updateToken(sharedPrefViewModel.userToken),
           ),
-          ChangeNotifierProvider(create: (context)=> PlayerViewModel()),
-          ChangeNotifierProvider(create: (context)=> SplashServices())
+          ChangeNotifierProvider(create: (context) => PlayerViewModel()),
+          ChangeNotifierProvider(create: (context) => SplashServices())
         ],
         child: Consumer<LanguageViewModel>(
           builder: (context, provider, child) {
@@ -106,10 +110,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHttpOverrides extends HttpOverrides{
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context){
+  HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

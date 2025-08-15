@@ -7,9 +7,7 @@ import 'package:crickAdda/view/const_widget/button_const.dart';
 import 'package:crickAdda/view/const_widget/text_field_const.dart';
 import 'package:crickAdda/view/wallet/doc_type_selection_bottomsheet.dart';
 import 'package:crickAdda/view/wallet/file_uploading_options_bottomsheet.dart';
-import 'package:crickAdda/view_model/profile_view_model.dart';
 import 'package:crickAdda/view_model/wallet_view_model.dart';
-
 import '../../res/color_const.dart';
 import '../../res/sizes_const.dart';
 import '../const_widget/container_const.dart';
@@ -185,87 +183,87 @@ class _VerifyDetailsScreenState extends State<VerifyDetailsScreen> {
   Widget stepOneContent() {
     return Consumer<WalletViewModel>(builder: (context, walletProvider, child) {
       return
-        // Provider.of<ProfileViewModel>(context)
-        //           .userProfile!
-        //           .data!
-        //           .isVerify ==
-        //       1
-        //   ? stepOneCompleted():
-           ContainerConst(
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              border: Border.all(
-                color: Colors.grey.shade400,
+          // Provider.of<ProfileViewModel>(context)
+          //           .userProfile!
+          //           .data!
+          //           .isVerify ==
+          //       1
+          //   ? stepOneCompleted():
+          ContainerConst(
+        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        border: Border.all(
+          color: Colors.grey.shade400,
+        ),
+        borderRadius: BorderRadius.circular(10),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: Column(
+          children: [
+            ListTile(
+              contentPadding: const EdgeInsets.all(0),
+              leading: CircleAvatar(
+                backgroundColor: AppColor.scaffoldBackgroundColor,
+                child: const Icon(Icons.supervised_user_circle),
               ),
+              title: TextConst(
+                text: "Step 1",
+                textColor: AppColor.textGreyColor,
+                fontSize: Sizes.fontSizeOne,
+                alignment: Alignment.centerLeft,
+              ),
+              subtitle: const TextConst(
+                text: "Enter your details",
+                fontWeight: FontWeight.w600,
+                alignment: Alignment.centerLeft,
+              ),
+            ),
+            Sizes.spaceHeight10,
+            ContainerConst(
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (_) {
+                      return const DocTypeSelectionBottomSheetScreen();
+                    });
+              },
               borderRadius: BorderRadius.circular(10),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Column(
-                children: [
-                  ListTile(
-                    contentPadding: const EdgeInsets.all(0),
-                    leading: CircleAvatar(
-                      backgroundColor: AppColor.scaffoldBackgroundColor,
-                      child: const Icon(Icons.supervised_user_circle),
-                    ),
-                    title: TextConst(
-                      text: "Step 1",
-                      textColor: AppColor.textGreyColor,
-                      fontSize: Sizes.fontSizeOne,
-                      alignment: Alignment.centerLeft,
-                    ),
-                    subtitle: const TextConst(
-                      text: "Enter your details",
-                      fontWeight: FontWeight.w600,
-                      alignment: Alignment.centerLeft,
-                    ),
-                  ),
-                  Sizes.spaceHeight10,
-                  ContainerConst(
-                    onTap: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (_) {
-                            return const DocTypeSelectionBottomSheetScreen();
-                          });
-                    },
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: AppColor.blackColor),
-                    child: ListTile(
-                      title: TextConst(
-                        text: walletProvider.initialDocType,
-                        alignment: Alignment.centerLeft,
-                      ),
-                      trailing: const Icon(
-                        Icons.arrow_drop_down,
-                        color: AppColor.blackColor,
-                      ),
-                    ),
-                  ),
-                  Sizes.spaceHeight20,
-                  commonTextField(walletProvider.idNumberType),
-                  ButtonConst(
-                    onTap: () {
-                      if (walletProvider.idNumber.text.isNotEmpty) {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (_) {
-                              return const FileUploadingOptionsBottomSheet();
-                            });
-                      } else {
-                        Utils.showErrorMessage(context,
-                            "Please ${walletProvider.idNumberType.toLowerCase()} to continue");
-                      }
-                    },
-                    label: walletProvider.initialDocType.toUpperCase(),
-                    color: AppColor.activeButtonGreenColor,
-                    textColor: AppColor.whiteColor,
-                    borderRadius: BorderRadius.circular(10),
-                    fontWeight: FontWeight.bold,
-                  ),
-                  Sizes.spaceHeight15,
-                  noteInfo()
-                ],
+              border: Border.all(color: AppColor.blackColor),
+              child: ListTile(
+                title: TextConst(
+                  text: walletProvider.initialDocType,
+                  alignment: Alignment.centerLeft,
+                ),
+                trailing: const Icon(
+                  Icons.arrow_drop_down,
+                  color: AppColor.blackColor,
+                ),
               ),
-            );
+            ),
+            Sizes.spaceHeight20,
+            commonTextField(walletProvider.idNumberType),
+            ButtonConst(
+              onTap: () {
+                if (walletProvider.idNumber.text.isNotEmpty) {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (_) {
+                        return const FileUploadingOptionsBottomSheet();
+                      });
+                } else {
+                  Utils.showErrorMessage(context,
+                      "Please ${walletProvider.idNumberType.toLowerCase()} to continue");
+                }
+              },
+              label: walletProvider.initialDocType.toUpperCase(),
+              color: AppColor.activeButtonGreenColor,
+              textColor: AppColor.whiteColor,
+              borderRadius: BorderRadius.circular(10),
+              fontWeight: FontWeight.bold,
+            ),
+            Sizes.spaceHeight15,
+            noteInfo()
+          ],
+        ),
+      );
     });
   }
 

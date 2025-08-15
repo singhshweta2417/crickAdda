@@ -127,7 +127,7 @@ class _MyContestLeaderBoardState extends State<MyContestLeaderBoard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 width: Sizes.screenWidth * 0.52,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

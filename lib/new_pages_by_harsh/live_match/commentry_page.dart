@@ -310,7 +310,7 @@ class _CommentryPageState extends State<CommentryPage> {
               height: Sizes.screenHeight*0.08,
               width: 15,
               color: Colors.orange,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(15),
                   bottomRight: Radius.circular(15)
               ),
@@ -324,7 +324,7 @@ class _CommentryPageState extends State<CommentryPage> {
                   color: Colors.orange,
                   width: 2
               ),
-              child: TextConst(
+              child: const TextConst(
                 text: "PTS",
                 textColor: Colors.orange,
               ),

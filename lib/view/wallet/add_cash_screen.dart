@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:crickAdda/res/SharedPreferencesUtil.dart';
-import 'package:crickAdda/utils/route/app_routes.dart';
 import 'package:crickAdda/utils/utils.dart';
 import 'package:crickAdda/view/const_widget/button_const.dart';
 import 'package:crickAdda/view_model/profile_view_model.dart';
 import 'package:crickAdda/view_model/wallet_view_model.dart';
-
 import '../../res/color_const.dart';
 import '../../res/sizes_const.dart';
 import '../../view_model/add_wallet_view_model.dart';

@@ -15,15 +15,15 @@ class SinglePlayerDetailsModel {
 
   SinglePlayerDetailsModel.fromJson(Map<String, dynamic> json) {
     personalDetails = json['personal_details'] != null
-        ? new PersonalDetails.fromJson(json['personal_details'])
+        ? PersonalDetails.fromJson(json['personal_details'])
         : null;
     tourFantacyStates = json['tour_fantacy_states'] != null
-        ? new TourFantacyStates.fromJson(json['tour_fantacy_states'])
+        ? TourFantacyStates.fromJson(json['tour_fantacy_states'])
         : null;
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
     msg = json['msg'];
@@ -70,17 +70,17 @@ class PersonalDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['player_image'] = this.playerImage;
-    data['points'] = this.points;
-    data['credit_points'] = this.creditPoints;
-    data['designation'] = this.designation;
-    data['bat'] = this.bat;
-    data['bowl'] = this.bowl;
-    data['nationality'] = this.nationality;
-    data['dob'] = this.dob;
-    data['playing_status'] = this.playingStatus;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['player_image'] = playerImage;
+    data['points'] = points;
+    data['credit_points'] = creditPoints;
+    data['designation'] = designation;
+    data['bat'] = bat;
+    data['bowl'] = bowl;
+    data['nationality'] = nationality;
+    data['dob'] = dob;
+    data['playing_status'] = playingStatus;
     return data;
   }
 }
@@ -97,9 +97,9 @@ class TourFantacyStates {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['match_played'] = this.matchPlayed;
-    data['avg_points'] = this.avgPoints;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['match_played'] = matchPlayed;
+    data['avg_points'] = avgPoints;
     return data;
   }
 }
@@ -255,7 +255,7 @@ class Data {
     if (json['event_data'] != null) {
       eventData = <EventData>[];
       json['event_data'].forEach((v) {
-        eventData!.add(new EventData.fromJson(v));
+        eventData!.add(EventData.fromJson(v));
       });
     }
   }

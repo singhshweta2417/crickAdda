@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:crickAdda/view/const_widget/appbar_const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../res/color_const.dart';
 import '../../../res/sizes_const.dart';
 import '../../const_widget/container_const.dart';
 import '../../const_widget/text_const.dart';
 
-
 class HelpAndSupportScreen extends StatefulWidget {
-   const HelpAndSupportScreen({super.key});
+  const HelpAndSupportScreen({super.key});
 
   @override
   State<HelpAndSupportScreen> createState() => _HelpAndSupportScreenState();
@@ -19,23 +16,28 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
   final List<Map<String, String>> faqData = [
     {
       'question': 'How do I withdraw my winnings?',
-      'answer': 'To withdraw your winnings, you must have a verified account. To verify, go to Profile > My Balance > Verify to Withdraw and follow the steps thereafter. Once verified, go to Profile > My Balance > Withdraw. Enter the amount you wish to withdraw and that\'s it.'
+      'answer':
+          'To withdraw your winnings, you must have a verified account. To verify, go to Profile > My Balance > Verify to Withdraw and follow the steps thereafter. Once verified, go to Profile > My Balance > Withdraw. Enter the amount you wish to withdraw and that\'s it.'
     },
     {
       'question': 'I can\'t see my added money, what should I do?',
-      'answer': 'If you can\'t see your added money, please check your transaction history or contact support for assistance.'
+      'answer':
+          'If you can\'t see your added money, please check your transaction history or contact support for assistance.'
     },
     {
       'question': 'My PAN/Bank verification was rejected. What do I do?',
-      'answer': 'If your PAN/Bank verification was rejected, please ensure that all the details you provided are correct and try again. If the issue persists, contact support.'
+      'answer':
+          'If your PAN/Bank verification was rejected, please ensure that all the details you provided are correct and try again. If the issue persists, contact support.'
     },
     {
       'question': 'How do I unlink PAN Card?',
-      'answer': 'To unlink your PAN Card, go to Profile > PAN Card > Unlink. Follow the instructions provided.'
+      'answer':
+          'To unlink your PAN Card, go to Profile > PAN Card > Unlink. Follow the instructions provided.'
     },
     {
       'question': 'How do I verify the points given to my team?',
-      'answer': 'To verify the points given to your team, go to the Points section in your Profile and check the detailed points breakdown.'
+      'answer':
+          'To verify the points given to your team, go to the Points section in your Profile and check the detailed points breakdown.'
     },
     {
       'question': 'What should I do if I encounter a technical issue?',
@@ -52,20 +54,19 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.scaffoldBackgroundColor,
-        appBar: appBarDesign(context),
-    body: Column(
-      children: [
-        Sizes.spaceHeight15,
-        recentActivity(),
-        Sizes.spaceHeight25,
-        mostAskedQuestions(),
-        Sizes.spaceHeight25,
-        viewPastTickets(),
-      ],
-    ),
+      backgroundColor: AppColor.scaffoldBackgroundColor,
+      appBar: appBarDesign(context),
+      body: Column(
+        children: [
+          Sizes.spaceHeight15,
+          recentActivity(),
+          Sizes.spaceHeight25,
+          mostAskedQuestions(),
+          Sizes.spaceHeight25,
+          viewPastTickets(),
+        ],
+      ),
     );
-
   }
 
   PreferredSizeWidget appBarDesign(context) {
@@ -104,13 +105,18 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
     );
   }
 
-  Widget mostAskedQuestions(){
+  Widget mostAskedQuestions() {
     return ContainerConst(
       color: AppColor.whiteColor,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(
         children: [
-          TextConst(text: AppLocalizations.of(context)!.mostAskedQues, alignment: FractionalOffset.centerLeft,fontSize: Sizes.fontSizeThree,fontWeight: FontWeight.w600,),
+          TextConst(
+            text: AppLocalizations.of(context)!.mostAskedQues,
+            alignment: FractionalOffset.centerLeft,
+            fontSize: Sizes.fontSizeThree,
+            fontWeight: FontWeight.w600,
+          ),
           Sizes.spaceHeight10,
           ListView.builder(
             shrinkWrap: true,
@@ -118,12 +124,16 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
             itemBuilder: (context, index) {
               return ContainerConst(
                 border: Border(
-                  bottom: BorderSide(width: 1, color: AppColor.scaffoldBackgroundColor)
-                ),
+                    bottom: BorderSide(
+                        width: 1, color: AppColor.scaffoldBackgroundColor)),
                 child: ListTile(
                   contentPadding: const EdgeInsets.all(0),
-                  title: TextConst(text:faqData[index]['question']!, alignment: FractionalOffset.centerLeft,),
-                  onTap: () => _showAnswerBottomSheet(context, faqData[index]['question']!, faqData[index]['answer']!),
+                  title: TextConst(
+                    text: faqData[index]['question']!,
+                    alignment: FractionalOffset.centerLeft,
+                  ),
+                  onTap: () => _showAnswerBottomSheet(context,
+                      faqData[index]['question']!, faqData[index]['answer']!),
                 ),
               );
             },
@@ -131,7 +141,11 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
           const ListTile(
             contentPadding: EdgeInsets.all(0),
             leading: Icon(Icons.menu),
-            title: TextConst(text: "Browse all topics",alignment: FractionalOffset.centerLeft,fontWeight: FontWeight.w600,),
+            title: TextConst(
+              text: "Browse all topics",
+              alignment: FractionalOffset.centerLeft,
+              fontWeight: FontWeight.w600,
+            ),
             trailing: Icon(Icons.navigate_next),
           ),
         ],
@@ -139,32 +153,44 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
     );
   }
 
-  Widget recentActivity(){
+  Widget recentActivity() {
     return const ContainerConst(
       padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
       color: AppColor.whiteColor,
       child: Column(
         children: [
-          TextConst(text: "No recent activity yet to show",fontWeight: FontWeight.w600,),
+          TextConst(
+            text: "No recent activity yet to show",
+            fontWeight: FontWeight.w600,
+          ),
           Sizes.spaceHeight10,
-          TextConst(text: "All the activities related to deposits and withdrawals will be shown here",textAlign: TextAlign.center,),
+          TextConst(
+            text:
+                "All the activities related to deposits and withdrawals will be shown here",
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );
   }
 
-  Widget viewPastTickets(){
+  Widget viewPastTickets() {
     return Container(
       color: AppColor.whiteColor,
       child: const ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 15),
-        title: TextConst(text: "View past tickets",alignment: FractionalOffset.centerLeft,fontWeight: FontWeight.w600,),
+        title: TextConst(
+          text: "View past tickets",
+          alignment: FractionalOffset.centerLeft,
+          fontWeight: FontWeight.w600,
+        ),
         trailing: Icon(Icons.navigate_next),
       ),
     );
   }
 
-  void _showAnswerBottomSheet(BuildContext context, String question, String answer) {
+  void _showAnswerBottomSheet(
+      BuildContext context, String question, String answer) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -181,32 +207,40 @@ class _HelpAndSupportScreenState extends State<HelpAndSupportScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pop(context);
                   },
-                  child: const Icon(Icons.clear_sharp,size: 35,)),
-              Divider(color: AppColor.scaffoldBackgroundColor,),
-              TextConst(text: question,
+                  child: const Icon(
+                    Icons.clear_sharp,
+                    size: 35,
+                  )),
+              Divider(
+                color: AppColor.scaffoldBackgroundColor,
+              ),
+              TextConst(
+                text: question,
                 fontWeight: FontWeight.w600,
                 fontSize: Sizes.fontSizeThree,
                 alignment: FractionalOffset.centerLeft,
               ),
-             Sizes.spaceHeight10,
+              Sizes.spaceHeight10,
               TextConst(
-               text: answer,
-               fontSize: Sizes.fontSizeOne,
-               alignment: FractionalOffset.centerLeft,
+                text: answer,
+                fontSize: Sizes.fontSizeOne,
+                alignment: FractionalOffset.centerLeft,
               ),
               const SizedBox(height: 16),
-               Divider(color: AppColor.scaffoldBackgroundColor,),
+              Divider(
+                color: AppColor.scaffoldBackgroundColor,
+              ),
               ContainerConst(
-                color:Colors.grey.shade200.withOpacity(0.8),
+                color: Colors.grey.shade200.withOpacity(0.8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     const TextConst(
-                       padding: EdgeInsets.only(left: 10),
-                      text:'Was this helpful?',
+                    const TextConst(
+                      padding: EdgeInsets.only(left: 10),
+                      text: 'Was this helpful?',
                     ),
                     Row(
                       children: [

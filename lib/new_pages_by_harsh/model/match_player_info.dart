@@ -89,7 +89,7 @@ class MatchPlayerInfo {
     if (json['event_data'] != null) {
       eventData = <EventData>[];
       json['event_data'].forEach((v) {
-        eventData!.add(new EventData.fromJson(v));
+        eventData!.add(EventData.fromJson(v));
       });
     }
   }

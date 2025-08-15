@@ -1,6 +1,3 @@
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:crickAdda/res/SharedPreferencesUtil.dart';
-
 class AppConstants {
   static const String appName = 'CRICKADDA';
   static const String appVersion = '1.0.3';
@@ -21,18 +18,17 @@ class AppConstants {
   ///Time settings in second
   static const int timeOut = 10;
 
-
   /// Api const cases
   static const otpApiTypeLogin = "1?userid=";
-  static const verifyOtpApiTypeUpdateProfile ="2?userid=";
-  static const verifyOtpApiWithApplyCoupon ="1?cupon=";
-  static const allReferralData ="0";
-  static const todayReferralData ="1";
-  static const yesterdayReferralData ="2";
-  static const thisMonthReferralData ="3";
-  static const commonSettingPrivacyPolicy ="1";
-  static const commonSettingAboutUs ="2";
-  static const commonSettingTC ="3";
-  static const notificationTypeAll ="1";
-  static const notificationTypeOffer ="2";
+  static const verifyOtpApiTypeUpdateProfile = "2?userid=";
+  static const verifyOtpApiWithApplyCoupon = "1?cupon=";
+  static const allReferralData = "0";
+  static const todayReferralData = "1";
+  static const yesterdayReferralData = "2";
+  static const thisMonthReferralData = "3";
+  static const commonSettingPrivacyPolicy = "1";
+  static const commonSettingAboutUs = "2";
+  static const commonSettingTC = "3";
+  static const notificationTypeAll = "1";
+  static const notificationTypeOffer = "2";
 }

@@ -2,11 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:crickAdda/model/user_promotion_data_model.dart';
-import 'package:crickAdda/repo/mlm_repo.dart';
-
 import '../model/my_referral_model.dart';
 import '../model/team_wise_subordnate_model.dart';
+import '../model/user_promotion_data_model.dart';
+import '../repo/mlm_repo.dart';
 import '../res/SharedPreferencesUtil.dart';
 
 enum MlmViewState { idle, loading, error, success }
@@ -32,9 +31,9 @@ class MlmViewModel extends ChangeNotifier {
 
 
   _setMlmViewState(MlmViewState state) {
-      _mlmView = state;
-      notifyListeners();
-   }
+    _mlmView = state;
+    notifyListeners();
+  }
 
   _setDataLoading(bool state) {
     _dataLoading = state;
@@ -47,6 +46,10 @@ class MlmViewModel extends ChangeNotifier {
     _setMlmViewState(MlmViewState.loading);
     try {
       _userPromotionData = await _mlmApiService.getUserPromotionData(userToken, previousDate);
+      if (kDebugMode) {
+        print(_userPromotionData);
+        print('userPromotionData');
+      }
       _setMlmViewState(MlmViewState.success);
       notifyListeners();
     } catch (e) {
@@ -57,9 +60,14 @@ class MlmViewModel extends ChangeNotifier {
   }
 
   Future<void> fetchReferralData(String userToken, String referralDataType) async {
-   _setDataLoading(true);
+    _setDataLoading(true);
     try {
       _myReferralData = await _mlmApiService.getReferralData(userToken, referralDataType);
+      if (kDebugMode) {
+        print(_myReferralData);
+        print('object');
+
+      }
       _setDataLoading(false);
       notifyListeners();
     } catch (e) {
@@ -97,11 +105,11 @@ class MlmViewModel extends ChangeNotifier {
       lastDate: DateTime(2101),
     );
     if (pickedDate != null && pickedDate != _selectedDate) {
-        _selectedDate = pickedDate;
-        notifyListeners();
-        await fetchReferralSubOrdinateDataOnFilter(Provider.of<SharedPrefViewModel>(context,
-            listen: false)
-            .userToken,"");
+      _selectedDate = pickedDate;
+      notifyListeners();
+      await fetchReferralSubOrdinateDataOnFilter(Provider.of<SharedPrefViewModel>(context,
+          listen: false)
+          .userToken,"");
 
     }
   }
@@ -109,8 +117,9 @@ class MlmViewModel extends ChangeNotifier {
   void setTearIndex(context,int index){
     _selectedTierIndex = index + 1;
     notifyListeners();
-     fetchReferralSubOrdinateDataOnFilter(Provider.of<SharedPrefViewModel>(context,
+    fetchReferralSubOrdinateDataOnFilter(Provider.of<SharedPrefViewModel>(context,
         listen: false)
         .userToken,"");
   }
+
 }

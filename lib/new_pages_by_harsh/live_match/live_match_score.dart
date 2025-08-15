@@ -195,7 +195,7 @@ class _LiveMatchScoreState extends State<LiveMatchScore> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         width: Sizes.screenWidth*0.43,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -221,7 +221,7 @@ class _LiveMatchScoreState extends State<LiveMatchScore> {
                           ],
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       TextConst(
                         text: getBatsmanData(
                             _socketData, 'bowler', 'bowler_data'),
@@ -281,7 +281,7 @@ class _LiveMatchScoreState extends State<LiveMatchScore> {
                           ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         width: Sizes.screenWidth * 0.47,
                         height: 30,
                         child:

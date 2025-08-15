@@ -102,7 +102,7 @@ class _HomePageSheemarState extends State<HomePageSheemar>
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomShimmer.fromColors(
                     baseColor: Colors.grey.shade300,
                     highlightColor: Colors.grey.shade200,

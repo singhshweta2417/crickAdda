@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:crickAdda/model/player_designation_model.dart';
-import 'package:crickAdda/view_model/contest_view_model.dart';
 import 'package:crickAdda/view_model/player_view_model.dart';
 import 'package:crickAdda/view_model/profile_view_model.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +9,6 @@ import 'package:crickAdda/res/color_const.dart';
 import 'package:crickAdda/res/sizes_const.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
-import 'package:crickAdda/view_model/services/player_selection_service.dart';
-
 import '../../view_model/game_view_model.dart';
 
 class TeamPreviewScreen extends StatefulWidget {
@@ -23,8 +19,6 @@ class TeamPreviewScreen extends StatefulWidget {
 }
 
 class _TeamPreviewScreenState extends State<TeamPreviewScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Consumer<PlayerViewModel>(builder: (context, provider, child) {
@@ -42,7 +36,7 @@ class _TeamPreviewScreenState extends State<TeamPreviewScreen> {
                       image: AssetImage(Assets.assetsPredctonBgPtch),
                       fit: BoxFit.fill),
                   child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: provider.playerDesignation.data!.length,
                       itemBuilder: (_, i) {
@@ -51,7 +45,8 @@ class _TeamPreviewScreenState extends State<TeamPreviewScreen> {
                           height: Sizes.screenHeight / 5,
                           width: Sizes.screenWidth,
                           alignment: Alignment.center,
-                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 10),
                           child: playerListing(
                               provider.playerDesignation.data![i]),
                         );
@@ -217,12 +212,15 @@ class _TeamPreviewScreenState extends State<TeamPreviewScreen> {
       );
     });
   }
+
   Widget playerListing(DesignationData designationData) {
     final gvmCon = Provider.of<GameViewModel>(context);
     final teamId = jsonDecode(gvmCon.selectedMatch.teamId ?? "");
     return Consumer<PlayerViewModel>(builder: (context, provider, child) {
       final playerList = provider.selectedPlayers
-          .where((e) => e.designationId == designationData.id || e.designationName == designationData.shortTerm)
+          .where((e) =>
+              e.designationId == designationData.id ||
+              e.designationName == designationData.shortTerm)
           .toList();
       return Column(
         children: [
@@ -234,7 +232,13 @@ class _TeamPreviewScreenState extends State<TeamPreviewScreen> {
           ),
           Sizes.spaceHeight10,
           Wrap(
-            spacing:playerList.length==5?Sizes.screenWidth / 5:playerList.length==6?Sizes.screenWidth/8:playerList.length==7?Sizes.screenWidth/10: Sizes.screenWidth / 15,
+            spacing: playerList.length == 5
+                ? Sizes.screenWidth / 5
+                : playerList.length == 6
+                    ? Sizes.screenWidth / 8
+                    : playerList.length == 7
+                        ? Sizes.screenWidth / 10
+                        : Sizes.screenWidth / 15,
             runSpacing: 10.0,
             alignment: WrapAlignment.spaceEvenly,
             children: List.generate(
@@ -244,33 +248,8 @@ class _TeamPreviewScreenState extends State<TeamPreviewScreen> {
                 return Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    if(provider.captain != null && provider.captain!.id == player.id)
-                    Positioned(
-                      top: -5,
-                      left: -8,
-                      child: ContainerConst(
-                        width: MediaQuery.of(context).size.width / 15,
-                        padding: const EdgeInsets.all(2),
-                        border: Border.all(
-                          color: player.teamId == teamId[1]
-                              ? AppColor.whiteColor
-                              : AppColor.textGreyColor,
-                          width: 1.5,
-                        ),
-                        shape: BoxShape.circle,
-                        color:player.teamId == teamId[1]
-                            ? AppColor.textGreyColor
-                            : AppColor.whiteColor,
-                        child: TextConst(
-                          text:"C",
-                          textColor: player.teamId == teamId[1]
-                              ? AppColor.whiteColor
-                              : AppColor.textGreyColor,
-                          fontSize: Sizes.fontSizeZero,
-                        ),
-                      ),
-                    ),
-                    if(provider.viceCaptain != null && provider.viceCaptain!.id == player.id)
+                    if (provider.captain != null &&
+                        provider.captain!.id == player.id)
                       Positioned(
                         top: -5,
                         left: -8,
@@ -284,11 +263,38 @@ class _TeamPreviewScreenState extends State<TeamPreviewScreen> {
                             width: 1.5,
                           ),
                           shape: BoxShape.circle,
-                          color:player.teamId == teamId[1]
+                          color: player.teamId == teamId[1]
                               ? AppColor.textGreyColor
                               : AppColor.whiteColor,
                           child: TextConst(
-                            text:"VC",
+                            text: "C",
+                            textColor: player.teamId == teamId[1]
+                                ? AppColor.whiteColor
+                                : AppColor.textGreyColor,
+                            fontSize: Sizes.fontSizeZero,
+                          ),
+                        ),
+                      ),
+                    if (provider.viceCaptain != null &&
+                        provider.viceCaptain!.id == player.id)
+                      Positioned(
+                        top: -5,
+                        left: -8,
+                        child: ContainerConst(
+                          width: MediaQuery.of(context).size.width / 15,
+                          padding: const EdgeInsets.all(2),
+                          border: Border.all(
+                            color: player.teamId == teamId[1]
+                                ? AppColor.whiteColor
+                                : AppColor.textGreyColor,
+                            width: 1.5,
+                          ),
+                          shape: BoxShape.circle,
+                          color: player.teamId == teamId[1]
+                              ? AppColor.textGreyColor
+                              : AppColor.whiteColor,
+                          child: TextConst(
+                            text: "VC",
                             textColor: player.teamId == teamId[1]
                                 ? AppColor.whiteColor
                                 : AppColor.textGreyColor,
@@ -297,7 +303,7 @@ class _TeamPreviewScreenState extends State<TeamPreviewScreen> {
                         ),
                       ),
                     SizedBox(
-                      width: Sizes.screenWidth/8,
+                      width: Sizes.screenWidth / 8,
                       child: Column(
                         children: [
                           ContainerConst(
@@ -311,7 +317,8 @@ class _TeamPreviewScreenState extends State<TeamPreviewScreen> {
                           ),
                           ContainerConst(
                               borderRadius: BorderRadius.circular(4),
-                              padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 2, vertical: 2),
                               color: player.teamId == teamId[1]
                                   ? AppColor.blackColor
                                   : AppColor.whiteColor,

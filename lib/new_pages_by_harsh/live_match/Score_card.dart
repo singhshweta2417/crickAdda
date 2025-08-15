@@ -12,7 +12,6 @@ import 'package:crickAdda/res/sizes_const.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
 import 'package:http/http.dart' as http;
-import 'package:crickAdda/view/widgets/players_details_page.dart';
 
 class ScorecardPage extends StatefulWidget {
   final GameData data;
@@ -247,7 +246,7 @@ class _ScorecardPageState extends State<ScorecardPage> {
                               fontSize: Sizes.fontSizeThree,
                             ),
                             Sizes.spaceWidth25,
-                            Container(
+                            SizedBox(
                               height: Sizes.screenHeight * 0.06,
                               width: Sizes.screenWidth * 0.57,
                               child: ListView.builder(

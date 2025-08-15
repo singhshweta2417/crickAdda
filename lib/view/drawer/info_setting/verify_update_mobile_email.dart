@@ -9,31 +9,30 @@ import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
 import 'package:crickAdda/view_model/profile_view_model.dart';
 import 'package:crickAdda/view_model/services/resend_otp_timer.dart';
-
 import '../../../res/sizes_const.dart';
-import '../../../utils/route/app_routes.dart';
-
-
 
 class VerifyOtpForUpdateMobileOrEmail extends StatefulWidget {
   final Map<String, dynamic> args;
   const VerifyOtpForUpdateMobileOrEmail({super.key, required this.args});
 
   @override
-  State<VerifyOtpForUpdateMobileOrEmail> createState() => _VerifyOtpForUpdateMobileOrEmailState();
+  State<VerifyOtpForUpdateMobileOrEmail> createState() =>
+      _VerifyOtpForUpdateMobileOrEmailState();
 }
 
-class _VerifyOtpForUpdateMobileOrEmailState extends State<VerifyOtpForUpdateMobileOrEmail> {
-
+class _VerifyOtpForUpdateMobileOrEmailState
+    extends State<VerifyOtpForUpdateMobileOrEmail> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ResendOtpTimerCountdownController>(context, listen: false).startTimer();
+    Provider.of<ResendOtpTimerCountdownController>(context, listen: false)
+        .startTimer();
   }
 
   @override
   void dispose() {
-    Provider.of<ResendOtpTimerCountdownController>(context, listen: false).disposeTimer();
+    Provider.of<ResendOtpTimerCountdownController>(context, listen: false)
+        .disposeTimer();
     super.dispose();
   }
 
@@ -41,15 +40,21 @@ class _VerifyOtpForUpdateMobileOrEmailState extends State<VerifyOtpForUpdateMobi
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.scaffoldBackgroundColor,
-      appBar: AppBarConst(title: AppLocalizations.of(context)!.enterOtp,),
+      appBar: AppBarConst(
+        title: AppLocalizations.of(context)!.enterOtp,
+      ),
       body: ContainerConst(
-        height: Sizes.screenHeight/3.5,
+        height: Sizes.screenHeight / 3.5,
         color: AppColor.whiteColor,
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextConst(text: "${AppLocalizations.of(context)!.enterOtpSent} ${widget.args["updateData"]}", alignment: FractionalOffset.centerLeft,),
+            TextConst(
+              text:
+                  "${AppLocalizations.of(context)!.enterOtpSent} ${widget.args["updateData"]}",
+              alignment: FractionalOffset.centerLeft,
+            ),
             Sizes.spaceHeight15,
             otpField(),
             Sizes.spaceHeight20,
@@ -59,8 +64,13 @@ class _VerifyOtpForUpdateMobileOrEmailState extends State<VerifyOtpForUpdateMobi
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextConst(text: "${AppLocalizations.of(context)!.facingIssue} ", textColor: AppColor.textGreyColor),
-                TextConst(text: AppLocalizations.of(context)!.contactUs,textColor: AppColor.blackColor,),
+                TextConst(
+                    text: "${AppLocalizations.of(context)!.facingIssue} ",
+                    textColor: AppColor.textGreyColor),
+                TextConst(
+                  text: AppLocalizations.of(context)!.contactUs,
+                  textColor: AppColor.blackColor,
+                ),
               ],
             ),
           ],
@@ -69,36 +79,48 @@ class _VerifyOtpForUpdateMobileOrEmailState extends State<VerifyOtpForUpdateMobi
     );
   }
 
-  Widget noReceivedSendAgain(context){
-    final timerController = Provider.of<ResendOtpTimerCountdownController>(context);
-    if(timerController.remainingTime==0) {
-      return  Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-         TextConst(text: "${AppLocalizations.of(context)!.dontReceive}? ", textColor: AppColor.textGreyColor),
-        TextConst(text: AppLocalizations.of(context)!.resendOTP,textColor: AppColor.blackColor, onTap: () {
-          timerController.resetTimer();
-        },),
-      ],
-    );
+  Widget noReceivedSendAgain(context) {
+    final timerController =
+        Provider.of<ResendOtpTimerCountdownController>(context);
+    if (timerController.remainingTime == 0) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextConst(
+              text: "${AppLocalizations.of(context)!.dontReceive}? ",
+              textColor: AppColor.textGreyColor),
+          TextConst(
+            text: AppLocalizations.of(context)!.resendOTP,
+            textColor: AppColor.blackColor,
+            onTap: () {
+              timerController.resetTimer();
+            },
+          ),
+        ],
+      );
     } else {
       return RichText(
         text: TextSpan(
           text: "${AppLocalizations.of(context)!.dontReceive}? ",
-          style: GoogleFonts.poppins(color: AppColor.textGreyColor, fontSize: Sizes.fontSizeTwo), // Default text color
+          style: GoogleFonts.poppins(
+              color: AppColor.textGreyColor,
+              fontSize: Sizes.fontSizeTwo), // Default text color
           children: [
             TextSpan(
               text: "${AppLocalizations.of(context)!.reqForANewOne} ",
-              style: GoogleFonts.poppins(color: AppColor.textGreyColor, fontSize: Sizes.fontSizeTwo),
+              style: GoogleFonts.poppins(
+                  color: AppColor.textGreyColor, fontSize: Sizes.fontSizeTwo),
             ),
             TextSpan(
               text: "${timerController.remainingTime} ",
-              style: GoogleFonts.poppins(color: AppColor.primaryRedColor, fontSize: Sizes.fontSizeTwo),
+              style: GoogleFonts.poppins(
+                  color: AppColor.primaryRedColor, fontSize: Sizes.fontSizeTwo),
             ),
             TextSpan(
               text: "Seconds",
-              style: GoogleFonts.poppins(color: AppColor.primaryRedColor,fontSize: Sizes.fontSizeTwo),
+              style: GoogleFonts.poppins(
+                  color: AppColor.primaryRedColor, fontSize: Sizes.fontSizeTwo),
             ),
           ],
         ),
@@ -106,29 +128,49 @@ class _VerifyOtpForUpdateMobileOrEmailState extends State<VerifyOtpForUpdateMobi
     }
   }
 
-  Widget otpField(){
-    return  Consumer<ProfileViewModel>(
-      builder: (context, profileProvider, child) {
-        return ContainerConst(
-          height: 50,
-          width: Sizes.screenWidth,
-          child: Pinput(
-            focusedPinTheme: PinTheme(decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey.shade500, width: 1.5)), color: AppColor.scaffoldBackgroundColor,borderRadius: BorderRadius.circular(0)),constraints: BoxConstraints(maxWidth: 50, maxHeight: 50), margin: EdgeInsets.only(left: 10),),
-            defaultPinTheme: PinTheme(decoration: BoxDecoration(border:Border(bottom: BorderSide(color: Colors.grey.shade500, width: 1.5)), color:  AppColor.scaffoldBackgroundColor,borderRadius: BorderRadius.circular(0)),constraints: BoxConstraints(maxWidth: 50, maxHeight: 50), margin: EdgeInsets.only(left: 10)),
-            autofocus: true,
-            controller: profileProvider.updateDataOtpCon,
-            length: 6,
-            pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-            showCursor: true,
-            onChanged: (v) {
-              if (v.length == 6) {
-                profileProvider.verifyOtp(context, {"navigateForm": "profileUpdate", "updateType":widget.args["updateType"], "updateData":widget.args["updateData"]});
-                // Navigator.pushReplacementNamed(context, AppRoutes.myProfileInfo,arguments: {"navigateForm": "profileUpdate", "updateType":widget.args["updateType"], "updateData":widget.args["updateData"]});
-              }
-            },
+  Widget otpField() {
+    return Consumer<ProfileViewModel>(
+        builder: (context, profileProvider, child) {
+      return ContainerConst(
+        height: 50,
+        width: Sizes.screenWidth,
+        child: Pinput(
+          focusedPinTheme: PinTheme(
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom:
+                        BorderSide(color: Colors.grey.shade500, width: 1.5)),
+                color: AppColor.scaffoldBackgroundColor,
+                borderRadius: BorderRadius.circular(0)),
+            constraints: BoxConstraints(maxWidth: 50, maxHeight: 50),
+            margin: EdgeInsets.only(left: 10),
           ),
-        );
-      }
-    );
+          defaultPinTheme: PinTheme(
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom:
+                          BorderSide(color: Colors.grey.shade500, width: 1.5)),
+                  color: AppColor.scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(0)),
+              constraints: BoxConstraints(maxWidth: 50, maxHeight: 50),
+              margin: EdgeInsets.only(left: 10)),
+          autofocus: true,
+          controller: profileProvider.updateDataOtpCon,
+          length: 6,
+          pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+          showCursor: true,
+          onChanged: (v) {
+            if (v.length == 6) {
+              profileProvider.verifyOtp(context, {
+                "navigateForm": "profileUpdate",
+                "updateType": widget.args["updateType"],
+                "updateData": widget.args["updateData"]
+              });
+              // Navigator.pushReplacementNamed(context, AppRoutes.myProfileInfo,arguments: {"navigateForm": "profileUpdate", "updateType":widget.args["updateType"], "updateData":widget.args["updateData"]});
+            }
+          },
+        ),
+      );
+    });
   }
 }

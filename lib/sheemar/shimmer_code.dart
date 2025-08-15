@@ -157,10 +157,10 @@ class _CustomShimmerState extends State<CustomShimmer> with SingleTickerProvider
       animation: _controller,
       child: widget.child,
       builder: (BuildContext context, Widget? child) => _CustomShimmer(
-        child: child,
         direction: widget.direction,
         gradient: widget.gradient,
         percent: _controller.value,
+        child: child,
       ),
     );
   }

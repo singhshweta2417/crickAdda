@@ -7,7 +7,6 @@ import 'package:crickAdda/res/color_const.dart';
 import 'package:crickAdda/res/sizes_const.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
-import 'package:crickAdda/view/widgets/players_details_page.dart';
 
 class LivePlayerView extends StatelessWidget {
   final List<LiveTeamPreviewModel> wkPlayers;

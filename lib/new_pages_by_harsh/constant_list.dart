@@ -8,17 +8,16 @@ import 'package:crickAdda/res/sizes_const.dart';
 import 'package:crickAdda/utils/utils.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
-import 'package:crickAdda/view/widgets/players_details_page.dart';
 
 class WicketKeeperWidget extends StatefulWidget {
   final List<TeamPlayerList> wkPlayers;
   final TeamData data;
 
   const WicketKeeperWidget({
-    Key? key,
+    super.key,
     required this.wkPlayers,
     required this.data,
-  }) : super(key: key);
+  });
 
   @override
   State<WicketKeeperWidget> createState() => _WicketKeeperWidgetState();

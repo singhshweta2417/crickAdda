@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:crickAdda/generated/assets.dart';
 import 'package:crickAdda/res/SharedPreferencesUtil.dart';
 import 'package:crickAdda/res/color_const.dart';
 import 'package:crickAdda/res/sizes_const.dart';

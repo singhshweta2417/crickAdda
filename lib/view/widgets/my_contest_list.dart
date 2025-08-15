@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:crickAdda/model/player_data_model.dart';
-import 'package:crickAdda/new_pages_by_harsh/live_match/constant/contest_details_page.dart';
 import 'package:crickAdda/new_pages_by_harsh/live_match/live_team_preview.dart';
-import 'package:crickAdda/new_pages_by_harsh/team_preview.dart';
 import 'package:crickAdda/res/dedline_passed_screen.dart';
 import 'package:crickAdda/view/contest/contest_screen.dart';
 import 'package:crickAdda/view_model/player_view_model.dart';
@@ -16,8 +13,6 @@ import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
 import 'package:crickAdda/view_model/contest_view_model.dart';
 
-import '../../model/team_data_model.dart';
-
 class MyContestList extends StatelessWidget {
   final String? time;
   const MyContestList({
@@ -25,7 +20,8 @@ class MyContestList extends StatelessWidget {
     this.time,
   });
   bool _isTimeValid(String? contestTime) {
-    if (contestTime == null || contestTime.isEmpty) return false; // Updated null check
+    if (contestTime == null || contestTime.isEmpty)
+      return false; // Updated null check
     try {
       final currentTime = DateTime.now();
       final parsedContestTime = DateTime.parse(contestTime);
@@ -41,7 +37,6 @@ class MyContestList extends StatelessWidget {
     return Consumer<ContestViewModel>(
       builder: (context, contestProvider, child) {
         final contests = contestProvider.contestData.myContest ?? [];
-        final contestLists = contestProvider.contestData.contestList ?? [];
 
         if (contests.isEmpty) {
           return Column(
@@ -70,30 +65,26 @@ class MyContestList extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             final contest = contests[index];
-            final contestList =
-                contestLists.length > index ? contestLists[index] : null;
 
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: ContainerConst(
                 onTap: () {
-            if(time == null ||_isTimeValid(time))  {
-              contestProvider.getContestDetail(
-                  context, contest.contestId?.toString() ?? '');
-              Navigator.pushNamed(
-                context,
-                AppRoutes.contestDetailScreen,
-                arguments: {"contestDetail": contest},
-              );
-            }else{
-              showModalBottomSheet(
-                  context: context,
-                  builder: (_) {
-                    return  const DedlinePassedScreen();
+                  if (time == null || _isTimeValid(time)) {
+                    contestProvider.getContestDetail(
+                        context, contest.contestId?.toString() ?? '');
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.contestDetailScreen,
+                      arguments: {"contestDetail": contest},
+                    );
+                  } else {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (_) {
+                          return const DedlinePassedScreen();
+                        });
                   }
-              );
-            }
-
                 },
                 color: AppColor.whiteColor,
                 border: Border.all(
@@ -156,10 +147,9 @@ class MyContestList extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: LinearProgressIndicator(
-                        value: (int.parse(contest.totalSpot.toString() ?? "0") -
-                                double.parse(
-                                    contest.left_spots.toString() ?? "0")) /
-                            int.parse(contest.totalSpot.toString() ?? "1"),
+                        value: (int.parse(contest.totalSpot.toString()) -
+                                double.parse(contest.left_spots.toString())) /
+                            int.parse(contest.totalSpot.toString()),
                         backgroundColor: Colors.grey.shade300,
                         valueColor:
                             const AlwaysStoppedAnimation<Color>(Colors.red),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:crickAdda/res/SharedPreferencesUtil.dart';
 import 'package:crickAdda/sheemar/home_page_sheemar.dart';
 import 'package:crickAdda/utils/utils.dart';
 import 'package:crickAdda/view/drawer/drawer_screen.dart';
@@ -55,4 +54,3 @@ class _BottomNavHomeScreenState extends State<BottomNavHomeScreen> {
     });
   }
 }
-

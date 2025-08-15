@@ -25,7 +25,8 @@ class AddWalletViewModel with ChangeNotifier {
   String? _paymentError;
   String? get paymentError => _paymentError;
 
-  final CFPaymentGatewayService cfPaymentGatewayService = CFPaymentGatewayService();
+  final CFPaymentGatewayService cfPaymentGatewayService =
+      CFPaymentGatewayService();
 
   AddWalletViewModel() {
     _setupPaymentCallbacks();
@@ -33,8 +34,8 @@ class AddWalletViewModel with ChangeNotifier {
 
   void _setupPaymentCallbacks() {
     cfPaymentGatewayService.setCallback(
-          (orderId) => _onPaymentSuccess(orderId),
-          (error, orderId) => _onPaymentError(error, orderId),
+      (orderId) => _onPaymentSuccess(orderId),
+      (error, orderId) => _onPaymentError(error, orderId),
     );
   }
 
@@ -44,6 +45,7 @@ class AddWalletViewModel with ChangeNotifier {
     notifyListeners();
     // Handle successful payment (update wallet balance, etc.)
   }
+
   void _onPaymentError(dynamic error, String orderId) {
     _paymentSuccess = false;
 
@@ -51,34 +53,37 @@ class AddWalletViewModel with ChangeNotifier {
     String errorMessage;
     if (error is Exception) {
       errorMessage = error.toString();
-    }
-    else if (error is String) {
+    } else if (error is String) {
       errorMessage = error;
-    }
-    else if (error != null && error is Object && error.toString().contains("getMessage")) {
+    } else if (error != null &&
+        error is Object &&
+        error.toString().contains("getMessage")) {
       // Handle Cashfree error object with getMessage()
       errorMessage = error.toString();
-    }
-    else {
+    } else {
       errorMessage = "Unknown payment error";
     }
 
     _paymentError = "Payment Failed: $errorMessage (Order ID: $orderId)";
     notifyListeners();
   }
+
   setAddWalletSessionModel(CreateSessionModel data) {
     _addWalletResponse = data;
     notifyListeners();
   }
 
-  Future<void> addWalletSessionCreate(dynamic amount, BuildContext context) async {
+  Future<void> addWalletSessionCreate(
+      dynamic amount, BuildContext context) async {
     try {
       _isProcessing = true;
       _paymentSuccess = false;
       _paymentError = null;
       notifyListeners();
 
-      final userId = await Provider.of<SharedPrefViewModel>(context, listen: false).loadUserToken();
+      final userId =
+          await Provider.of<SharedPrefViewModel>(context, listen: false)
+              .loadUserToken();
 
       Map<String, dynamic> data = {
         "userid": userId,
@@ -117,19 +122,20 @@ class AddWalletViewModel with ChangeNotifier {
     }
   }
 
-  Future<void> startPayment(String orderId, String paymentSessionId, BuildContext context) async {
+  Future<void> startPayment(
+      String orderId, String paymentSessionId, BuildContext context) async {
     try {
       /// STEP 2: Build session
       var session = CFSessionBuilder()
-          .setEnvironment(CFEnvironment.SANDBOX) // Change to PRODUCTION in live mode
+          .setEnvironment(
+              CFEnvironment.SANDBOX) // Change to PRODUCTION in live mode
           .setOrderId(orderId)
           .setPaymentSessionId(paymentSessionId)
           .build();
 
       /// STEP 3: Build WebCheckout payment object
-      var cfWebCheckout = CFWebCheckoutPaymentBuilder()
-          .setSession(session!)
-          .build();
+      var cfWebCheckout =
+          CFWebCheckoutPaymentBuilder().setSession(session).build();
 
       /// STEP 4: Start payment
       cfPaymentGatewayService.doPayment(cfWebCheckout);

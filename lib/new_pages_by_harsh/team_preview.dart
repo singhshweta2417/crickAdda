@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 
 class TeamPreview extends StatefulWidget {
   final TeamData data;
-  const TeamPreview({Key? key, required this.data}) : super(key: key);
+  const TeamPreview({super.key, required this.data});
   @override
   State<TeamPreview> createState() => _TeamPreviewState();
 }
@@ -312,7 +312,6 @@ class _TeamPreviewState extends State<TeamPreview> {
     });
   }
   Widget liveAppBar() {
-    final matchData = Provider.of<GameViewModel>(context).selectedMatch;
     return Consumer<PlayerViewModel>(builder: (context, provider, child) {
       return Container(
         height: Sizes.screenHeight * 0.09,

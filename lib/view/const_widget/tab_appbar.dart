@@ -290,8 +290,6 @@ class TabAppBar extends StatelessWidget implements PreferredSizeWidget {
         height: kToolbarHeight,
         child: TabBar(
           onTap: (tabIndex) async {
-            print(gameProvider.gameType.data![tabIndex].id);
-            print('gameType');
             await gameProvider.getGameData(
                 context, gameProvider.gameType.data![tabIndex].id.toString());
             gameProvider.setSelectedGameTabIndex(

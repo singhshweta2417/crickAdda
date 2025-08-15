@@ -37,7 +37,6 @@ class SplashServices with ChangeNotifier  {
   final _updateApk = UpdateApkRepository();
   Future<void> updateApkApi(context) async {
     _updateApk.updateApkApi().then((value) {
-
       if (value['status'] == "200") {
         if(value['data']['versions']!=AppConstants.appVersion){
           _downloadAndInstall(context, value['data']['link']);

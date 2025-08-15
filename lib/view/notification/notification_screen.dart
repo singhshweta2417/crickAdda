@@ -4,14 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:crickAdda/generated/assets.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view_model/notification_view_model.dart';
-
 import '../../res/SharedPreferencesUtil.dart';
 import '../../res/app_const.dart';
 import '../../res/color_const.dart';
 import '../../res/sizes_const.dart';
 import '../../utils/utils.dart';
-import '../../view_model/services/notification_service.dart';
-import '../const_widget/appbar_const.dart';
 import '../const_widget/text_const.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -26,9 +23,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Consumer<NotificationViewModel>(
         builder: (context, notificationCon, child) {
-          WidgetsBinding.instance.addPostFrameCallback((_){
-            notificationCon.viewNewNotifications(Provider.of<SharedPrefViewModel>(context, listen: false).userToken, AppConstants.notificationTypeAll);
-          });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        notificationCon.viewNewNotifications(
+            Provider.of<SharedPrefViewModel>(context, listen: false).userToken,
+            AppConstants.notificationTypeAll);
+      });
       return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -52,17 +51,23 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   onTap: (tabIndex) {
                     if (tabIndex == 1) {
                       Provider.of<NotificationViewModel>(context, listen: false)
-                          .fetchNotification(
-                              AppConstants.notificationTypeAll).then((v){
-                        notificationCon.viewNewNotifications(Provider.of<SharedPrefViewModel>(context, listen: false).userToken, AppConstants.notificationTypeAll);
-
+                          .fetchNotification(AppConstants.notificationTypeAll)
+                          .then((v) {
+                        notificationCon.viewNewNotifications(
+                            Provider.of<SharedPrefViewModel>(context,
+                                    listen: false)
+                                .userToken,
+                            AppConstants.notificationTypeAll);
                       });
                     } else if (tabIndex == 2) {
                       Provider.of<NotificationViewModel>(context, listen: false)
-                          .fetchNotification(
-                              AppConstants.notificationTypeOffer).then((v){
-                        notificationCon.viewNewNotifications(Provider.of<SharedPrefViewModel>(context, listen: false).userToken,  AppConstants.notificationTypeOffer);
-
+                          .fetchNotification(AppConstants.notificationTypeOffer)
+                          .then((v) {
+                        notificationCon.viewNewNotifications(
+                            Provider.of<SharedPrefViewModel>(context,
+                                    listen: false)
+                                .userToken,
+                            AppConstants.notificationTypeOffer);
                       });
                     } else {
                       if (kDebugMode) {
@@ -136,7 +141,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             maxLines: 1,
                           ),
                           subtitle: TextConst(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 2),
                             text: data.description ?? "",
                             alignment: Alignment.centerLeft,
                             fontSize: Sizes.fontSizeOne,
@@ -146,7 +152,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           children: [
                             const Divider(),
                             TextConst(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 2),
                               text: data.description ?? "",
                               alignment: Alignment.centerLeft,
                               fontSize: Sizes.fontSizeOne,

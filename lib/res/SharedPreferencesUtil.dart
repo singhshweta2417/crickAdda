@@ -1,33 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../utils/route/app_routes.dart';
-
-
-// class SharedPrefUtils {
-//   static late SharedPreferences _prefs;
-//
-//   static Future<void> init() async {
-//     _prefs = await SharedPreferences.getInstance();
-//   }
-//
-//   static void setUserToken(String userToken){
-//      _prefs.setString("userToken", userToken);
-//   }
-//
-//   static String getUserToken(){
-//     return _prefs.getString("userToken")??"";
-//   }
-//
-//   static void removeUserToken(){
-//      _prefs.remove("userToken");
-//   }
-// }
-
-
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 class SharedPrefViewModel extends ChangeNotifier {
   String _userToken = "";
 

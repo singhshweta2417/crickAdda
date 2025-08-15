@@ -1,12 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:crickAdda/view/team/team_preview_screen.dart';
 import 'package:crickAdda/view_model/player_view_model.dart';
-import 'package:crickAdda/view_model/services/player_selection_service.dart';
-
 import '../../res/color_const.dart';
 import '../../res/sizes_const.dart';
 import '../../utils/route/app_routes.dart';
@@ -91,77 +88,76 @@ class _PastLineUpPlayersScreenState extends State<PastLineUpPlayersScreen> {
               Sizes.spaceHeight15,
               teamCountIndicator(),
               Sizes.spaceHeight10,
-              Consumer<GameViewModel>(
-                  builder: (context, gvmCom, child) {
-                    final teamId= jsonDecode(gvmCom.selectedMatch.teamId??"");
-                    return ContainerConst(
-                      height: kToolbarHeight,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 8.75),
-                      color: AppColor.whiteColor,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Consumer<GameViewModel>(builder: (context, gvmCom, child) {
+                final teamId = jsonDecode(gvmCom.selectedMatch.teamId ?? "");
+                return ContainerConst(
+                  height: kToolbarHeight,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10, vertical: 8.75),
+                  color: AppColor.whiteColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              ContainerConst(
-                                shape: BoxShape.circle,
-                                width: 40,
-                                height: 40,
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        gvmCom.selectedMatch.homeTeamImage??""),
-                                    fit: BoxFit.cover),
-                              ),
-                              Sizes.spaceWidth5,
-                              TextConst(
-                                text: gvmCom.selectedMatch.homeTeamShortName??"",
-                                fontWeight: FontWeight.bold,
-                              ),
-                              Consumer<PlayerViewModel>(
-                                  builder: (context, pvmCon, _) {
-                                    return TextConst(
-                                      text:
-                                      "(${pvmCon.selectedPlayers.where((data) => data.teamId == teamId[0] && data.isSelected == true).length})",
-                                      fontSize: Sizes.fontSizeOne,
-                                    );
-                                  }
-                              ),
-                            ],
+                          ContainerConst(
+                            shape: BoxShape.circle,
+                            width: 40,
+                            height: 40,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    gvmCom.selectedMatch.homeTeamImage ?? ""),
+                                fit: BoxFit.cover),
                           ),
-                          optionSwitch(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Consumer<PlayerViewModel>(
-                                  builder: (context, pvmCon, _) {
-                                    return TextConst(
-                                      text:
-                                      "(${pvmCon.selectedPlayers.where((data) => data.teamId == teamId[1] && data.isSelected == true).length})",
-                                      fontSize: Sizes.fontSizeOne,
-                                    );
-                                  }
-                              ),
-                               TextConst(
-                                text: gvmCom.selectedMatch.visitorTeamShortName??"",
-                                fontWeight: FontWeight.bold,
-                              ),
-                              Sizes.spaceWidth5,
-                               ContainerConst(
-                                shape: BoxShape.circle,
-                                width: 40,
-                                height: 40,
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        gvmCom.selectedMatch.visitorTeamImage??""),
-                                    fit: BoxFit.cover),
-                              ),
-                            ],
+                          Sizes.spaceWidth5,
+                          TextConst(
+                            text: gvmCom.selectedMatch.homeTeamShortName ?? "",
+                            fontWeight: FontWeight.bold,
+                          ),
+                          Consumer<PlayerViewModel>(
+                              builder: (context, pvmCon, _) {
+                            return TextConst(
+                              text:
+                                  "(${pvmCon.selectedPlayers.where((data) => data.teamId == teamId[0] && data.isSelected == true).length})",
+                              fontSize: Sizes.fontSizeOne,
+                            );
+                          }),
+                        ],
+                      ),
+                      optionSwitch(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Consumer<PlayerViewModel>(
+                              builder: (context, pvmCon, _) {
+                            return TextConst(
+                              text:
+                                  "(${pvmCon.selectedPlayers.where((data) => data.teamId == teamId[1] && data.isSelected == true).length})",
+                              fontSize: Sizes.fontSizeOne,
+                            );
+                          }),
+                          TextConst(
+                            text:
+                                gvmCom.selectedMatch.visitorTeamShortName ?? "",
+                            fontWeight: FontWeight.bold,
+                          ),
+                          Sizes.spaceWidth5,
+                          ContainerConst(
+                            shape: BoxShape.circle,
+                            width: 40,
+                            height: 40,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    gvmCom.selectedMatch.visitorTeamImage ??
+                                        ""),
+                                fit: BoxFit.cover),
                           ),
                         ],
                       ),
-                    );
-                  }),
+                    ],
+                  ),
+                );
+              }),
               ContainerConst(
                   height: kToolbarHeight / 2,
                   padding: const EdgeInsets.symmetric(vertical: 3),
@@ -336,25 +332,29 @@ class _PastLineUpPlayersScreenState extends State<PastLineUpPlayersScreen> {
   //   });
   // }
   Widget floatingActionContent() {
-    return
-      Consumer2<PlayerViewModel, GameViewModel>(
-          builder: (context, playerProvider, gameProvider, child) {
-            final selectedPlayerCount = playerProvider.selectedPlayers.length;
-            final teamIds = jsonDecode(gameProvider.selectedMatch.teamId ?? "[]");
+    return Consumer2<PlayerViewModel, GameViewModel>(
+        builder: (context, playerProvider, gameProvider, child) {
+      final selectedPlayerCount = playerProvider.selectedPlayers.length;
+      final teamIds = jsonDecode(gameProvider.selectedMatch.teamId ?? "[]");
 
-            final team1PlayerCount = playerProvider.selectedPlayers
-                .where((e) => e.teamId == teamIds[1]) // Assuming teamIds[1] is Team 1
-                .length;
-            final team2PlayerCount = playerProvider.selectedPlayers
-                .where((e) => e.teamId == teamIds[0]) // Assuming teamIds[0] is Team 2
-                .length;
+      final team1PlayerCount = playerProvider.selectedPlayers
+          .where((e) => e.teamId == teamIds[1]) // Assuming teamIds[1] is Team 1
+          .length;
+      final team2PlayerCount = playerProvider.selectedPlayers
+          .where((e) => e.teamId == teamIds[0]) // Assuming teamIds[0] is Team 2
+          .length;
 
-            final allDesignationsSelected = playerProvider.playerDesignation.data!.every((designation) {
-              return playerProvider.selectedPlayers.any((e) => e.designationId == designation.id || e.designationName.toString().toLowerCase()== designation.shortTerm.toString().toLowerCase());
-            });
+      final allDesignationsSelected =
+          playerProvider.playerDesignation.data!.every((designation) {
+        return playerProvider.selectedPlayers.any((e) =>
+            e.designationId == designation.id ||
+            e.designationName.toString().toLowerCase() ==
+                designation.shortTerm.toString().toLowerCase());
+      });
 
-            final isElevenPlayersSelected = selectedPlayerCount == 11;
-            final isMinOnePlayerEachTeam = team1PlayerCount > 0 && team2PlayerCount > 0;
+      final isElevenPlayersSelected = selectedPlayerCount == 11;
+      final isMinOnePlayerEachTeam =
+          team1PlayerCount > 0 && team2PlayerCount > 0;
       return ContainerConst(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -380,11 +380,14 @@ class _PastLineUpPlayersScreenState extends State<PastLineUpPlayersScreen> {
             Sizes.spaceWidth15,
             ButtonConst(
               onTap: () {
-                if (isElevenPlayersSelected && allDesignationsSelected && isMinOnePlayerEachTeam) {
+                if (isElevenPlayersSelected &&
+                    allDesignationsSelected &&
+                    isMinOnePlayerEachTeam) {
                   Navigator.pushNamed(context, AppRoutes.chooseTeamCAndVC);
                 } else {
                   if (kDebugMode) {
-                    print("Please select exactly 11 players, with at least one player from each team, to proceed");
+                    print(
+                        "Please select exactly 11 players, with at least one player from each team, to proceed");
                   }
                 }
               },
@@ -392,7 +395,9 @@ class _PastLineUpPlayersScreenState extends State<PastLineUpPlayersScreen> {
               height: 40,
               borderRadius: BorderRadius.circular(25),
               width: 90,
-              color: (isElevenPlayersSelected && allDesignationsSelected && isMinOnePlayerEachTeam)
+              color: (isElevenPlayersSelected &&
+                      allDesignationsSelected &&
+                      isMinOnePlayerEachTeam)
                   ? AppColor.activeButtonGreenColor
                   : Colors.grey.shade500,
               textColor: AppColor.whiteColor,

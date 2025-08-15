@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:crickAdda/model/game_data_model.dart';
-import 'package:crickAdda/model/game_type_model.dart';
-import 'package:crickAdda/model/home_slider_model.dart';
-import 'package:crickAdda/model/match_type_model.dart';
-import 'package:crickAdda/repo/games_repo.dart';
+import 'package:flutter/material.dart';
+import '../model/game_data_model.dart';
+import '../model/game_type_model.dart';
+import '../model/match_type_model.dart';
+import '../repo/games_repo.dart';
 
 enum GameState { loading, success, error, idle }
 
@@ -23,6 +23,25 @@ class GameViewModel with ChangeNotifier {
   String? get userToken=>_userToken;
   GameData? _selectedMatch;
 
+  int _offset = 0;
+  final int _limit = 10;
+  bool _isFetchingMore = false;
+
+  bool _hasMoreData = true;
+  bool get hasMoreData => _hasMoreData;
+
+
+  bool isLoading = false;
+
+  void startLoading() {
+    isLoading = true;
+    notifyListeners();
+  }
+
+  void stopLoading() {
+    isLoading = false;
+    notifyListeners();
+  }
 
   GameTypeModel get gameType => _gameType!;
   GameState get gameState => _gameState;
@@ -79,31 +98,100 @@ class GameViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  // Future<void> getGameData(context, String gameId,String limit,String offset) async {
+  //   _setGameDataState(GameDataState.loading);
+  //   try {
+  //     _gameData = await _gameApiService.getGameData(_userToken.toString(), gameId,limit,offset);
+  //     _message = _gameType!.msg.toString();
+  //     if (_gameData!.complete!.isEmpty && _gameData!.upcoming!.isEmpty && _gameData!.live!.isEmpty) {
+  //       _setGameDataState(GameDataState.noDataAvl);
+  //     } else {
+  //       _setGameDataState(GameDataState.success);
+  //     }
+  //   } catch (e) {
+  //     _message = 'Failed to load match data: $e';
+  //     _setGameDataState(GameDataState.error);
+  //   }
+  //   notifyListeners();
+  // }
 
-  Future<void> getGameData(context, String gameId) async {
-    _setGameDataState(GameDataState.loading);
+  Future<void> getGameData(BuildContext context, String gameId, {bool isLoadMore = false}) async {
+    if (isLoadMore && (_isFetchingMore || !_hasMoreData)) return;
+    _gameData ??= GamesDataModel(complete: [], upcoming: [], live: []);
+
+    if (!isLoadMore) {
+      _offset = 0;
+      _hasMoreData = true;
+      _setGameDataState(GameDataState.loading);
+    } else {
+      _isFetchingMore = true;
+    }
+
     try {
-      _gameData =
-          await _gameApiService.getGameData(_userToken.toString(), gameId);
-      _message = _gameType!.msg.toString();
-      if (_gameData!.complete!.isEmpty &&
-          _gameData!.upcoming!.isEmpty &&
-          _gameData!.live!.isEmpty) {
+      if (kDebugMode) {
+        print("Fetching data with offset: $_offset and limit: $_limit");
+      }
+
+      GamesDataModel newData = await _gameApiService.getGameData(
+        _userToken.toString(),
+        gameId,
+        _limit.toString(),
+        _offset.toString(),
+      );
+
+      if (kDebugMode) {
+        print("New data received: ${newData.upcoming?.length ?? 0} items");
+      }
+
+      // Ensure _gameData is not null before assigning values
+      // _gameData ??= GamesDataModel(complete: [], upcoming: [], live: []);
+
+      // Update message from _gameType
+      _message = _gameType?.msg.toString() ?? "No data available";
+
+      if ((newData.complete?.isEmpty ?? true) &&
+          (newData.upcoming?.isEmpty ?? true) &&
+          (newData.live?.isEmpty ?? true)) {
+        // No data available, show message and set state
         _setGameDataState(GameDataState.noDataAvl);
       } else {
+        // Data is available, so set success state
         _setGameDataState(GameDataState.success);
       }
+
+      // Handle upcoming data separately
+      if (newData.upcoming?.isNotEmpty ?? false) {
+        if (!isLoadMore) {
+          _gameData = newData;
+        } else {
+          _gameData?.upcoming?.addAll(newData.upcoming!);
+        }
+        _offset += _limit;
+      } else {
+        _hasMoreData = false;
+      }
+
     } catch (e) {
-      _message = 'Failed to load match data: $e';
+      if (kDebugMode) {
+        print("Error fetching data: $e");
+      }
+      _message = "Failed to load game data";
       _setGameDataState(GameDataState.error);
     }
+
+    _isFetchingMore = false;
     notifyListeners();
   }
+
+  void resetPagination() {
+    _offset = 0;
+    _hasMoreData = true;
+  }
+
 
   Future<void> getMatchType(context) async {
     _setGameState(GameState.loading);
     try {
-      print("holaa");
       _matchType = await _gameApiService.getMatchType();
       _message = _gameType!.msg.toString();
       _setGameState(GameState.success);

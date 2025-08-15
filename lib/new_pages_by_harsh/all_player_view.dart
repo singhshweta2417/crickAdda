@@ -120,9 +120,9 @@ class _AllPlayerViewState extends State<AllPlayerView> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back, color: AppColor.whiteColor),
+              icon: const Icon(Icons.arrow_back, color: AppColor.whiteColor),
             ),
-            TextConst(
+            const TextConst(
               textAlign: TextAlign.start,
               text: "Player Info",
               textColor: AppColor.whiteColor,
@@ -151,8 +151,8 @@ class _AllPlayerViewState extends State<AllPlayerView> {
       body: playerInfoDetail.isEmpty
           ? Center(
         child: responseStatusCode == null
-            ? CircularProgressIndicator()
-            : TextConst(
+            ? const CircularProgressIndicator()
+            : const TextConst(
           text: "No data available",
           textColor: AppColor.textGreyColor,
         ),

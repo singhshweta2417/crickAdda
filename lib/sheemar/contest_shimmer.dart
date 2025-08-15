@@ -14,9 +14,8 @@ class _ContestShimmerState extends State<ContestShimmer>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    const leftPadding = EdgeInsets.only(left: 20);
     const horizontalPadding = EdgeInsets.symmetric(horizontal: 20);
-    return     ListView.builder(
+    return ListView.builder(
       shrinkWrap: true,
       padding: const EdgeInsets.only(bottom: 6.0),
       itemCount: 5, // Number of items in the list
@@ -36,9 +35,8 @@ class _ContestShimmerState extends State<ContestShimmer>
     return Container(
       alignment: Alignment.centerLeft,
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-
       ),
       child: listData(),
     );
@@ -158,7 +156,6 @@ class _ContestShimmerState extends State<ContestShimmer>
                   ),
                 ),
               ),
-
             ],
           ),
           Sizes.spaceHeight20,
@@ -172,7 +169,10 @@ class _ContestShimmerState extends State<ContestShimmer>
               padding: const EdgeInsets.all(4.0),
               child: Row(
                 children: [
-                  Icon(Icons.looks_one_outlined,color: Colors.grey.shade300,),
+                  Icon(
+                    Icons.looks_one_outlined,
+                    color: Colors.grey.shade300,
+                  ),
                   CustomShimmer.fromColors(
                     baseColor: Colors.grey.shade300,
                     highlightColor: Colors.grey.shade200,
@@ -186,7 +186,10 @@ class _ContestShimmerState extends State<ContestShimmer>
                     ),
                   ),
                   Sizes.spaceWidth10,
-                  Icon(Icons.emoji_events_outlined,color: Colors.grey.shade300,),
+                  Icon(
+                    Icons.emoji_events_outlined,
+                    color: Colors.grey.shade300,
+                  ),
                   CustomShimmer.fromColors(
                     baseColor: Colors.grey.shade300,
                     highlightColor: Colors.grey.shade200,
@@ -200,7 +203,10 @@ class _ContestShimmerState extends State<ContestShimmer>
                     ),
                   ),
                   Sizes.spaceWidth10,
-                  Icon(Icons.airplane_ticket_outlined,color: Colors.grey.shade300,),
+                  Icon(
+                    Icons.airplane_ticket_outlined,
+                    color: Colors.grey.shade300,
+                  ),
                   CustomShimmer.fromColors(
                     baseColor: Colors.grey.shade300,
                     highlightColor: Colors.grey.shade200,
@@ -230,7 +236,6 @@ class _ContestShimmerState extends State<ContestShimmer>
               ),
             ),
           ),
-
         ],
       ),
     );

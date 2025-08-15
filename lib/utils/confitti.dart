@@ -21,9 +21,9 @@ class _CustomConfettiScreenState extends State<CustomConfettiScreen>
       duration: const Duration(seconds: 5),
     )..addListener(() {
       setState(() {
-        particles.forEach((particle) {
+        for (var particle in particles) {
           particle.update();
-        });
+        }
       });
     });
 
@@ -141,7 +141,7 @@ class ConfettiPainter extends CustomPainter {
       // Draw the particle as a rectangle (can customize to shapes like stars or circles)
       canvas.drawRect(
         Rect.fromCenter(
-          center: Offset(0, 0),
+          center: const Offset(0, 0),
           width: particle.size,
           height: particle.size / 2,
         ),

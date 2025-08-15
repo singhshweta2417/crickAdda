@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:crickAdda/generated/assets.dart';
 import 'package:crickAdda/res/color_const.dart';
 import 'package:crickAdda/res/sizes_const.dart';
-import 'package:crickAdda/utils/utils.dart';
 import 'package:crickAdda/view/const_widget/button_const.dart';
 import 'package:crickAdda/view/const_widget/container_const.dart';
 import 'package:crickAdda/view/const_widget/text_const.dart';
@@ -24,8 +23,6 @@ class _MyTeamListState extends State<MyTeamList> {
   @override
   Widget build(BuildContext context) {
     return Consumer<PlayerViewModel>(builder: (context, pvmCon, child) {
-      final userName =
-          Provider.of<ProfileViewModel>(context).userProfile!.data!.name;
       return pvmCon.teamData!.data!.isEmpty
           ? Column(
               children: [
@@ -66,8 +63,9 @@ class _MyTeamListState extends State<MyTeamList> {
                         onTap: () {
                           Provider.of<PlayerViewModel>(context, listen: false)
                               .clearSelectedPlayerList();
-                        //  contestProvider.setEnableJoinContestBottomSheet(false);
-                          Navigator.pushNamed(context, AppRoutes.createTeamScreen);
+                          //  contestProvider.setEnableJoinContestBottomSheet(false);
+                          Navigator.pushNamed(
+                              context, AppRoutes.createTeamScreen);
                         },
                         //  label: 'Create a team'.toUpperCase(),
                         style: const TextStyle(
